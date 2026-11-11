@@ -6,6 +6,8 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "nodemon app.js",
+		"dev": "cross-env NODE_ENV=development nodemon app.js",
+		"qa": "cross-env NODE_ENV=qa nodemon app.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Hanser Ventura",
@@ -18,8 +20,8 @@
 		"dotenv": "^18.0.10",
 		"express": "^5.3.0",
 		"express-handlebars": "^8.0.3",
+		"mysql2": "^3.24.6",
 		"sequelize": "^6.37.8",
-		"sqlite3": "^6.0.1",
-		"tedious": "^20.3.8"
+		"sqlite3": "^6.0.1"
 	}
 }
