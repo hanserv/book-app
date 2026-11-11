@@ -1,0 +1,25 @@
+{
+	"name": "book-app",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon app.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Hanser Ventura",
+	"license": "ISC",
+	"devDependencies": {
+		"cross-env": "^10.1.0",
+		"nodemon": "^3.1.14"
+	},
+	"dependencies": {
+		"dotenv": "^18.0.10",
+		"express": "^5.3.0",
+		"express-handlebars": "^8.0.3",
+		"sequelize": "^6.37.8",
+		"sqlite3": "^6.0.1",
+		"tedious": "^20.3.8"
+	}
+}
