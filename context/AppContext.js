@@ -2,6 +2,7 @@ import sequelize from '../config/connection.js';
 import {environment} from '../config/environment.js';
 import Category from '../models/CategoryModel.js';
 import Author from '../models/AuthorModel.js';
+import Publisher from '../models/PublisherModel.js';
 
 const connect = async () => {
 	await sequelize.authenticate();
@@ -17,4 +18,5 @@ export default {
 	connect,
 	Categories: Category,
 	Authors: Author,
+	Publishers: Publisher,
 };
