@@ -1,5 +1,6 @@
 import sequelize from '../config/connection.js';
 import {environment} from '../config/environment.js';
+import Category from '../models/CategoryModel.js';
 
 const connect = async () => {
 	await sequelize.authenticate();
@@ -13,4 +14,5 @@ const connect = async () => {
 export default {
 	sequelize,
 	connect,
+	Categories: Category,
 };

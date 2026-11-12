@@ -5,6 +5,7 @@ import {port, environment} from './config/environment.js';
 import appContext from './context/AppContext.js';
 import {projectRoot} from './utils/paths.js';
 import homeRoutes from './routes/home-router.js';
+import categoryRoutes from './routes/category-router.js';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use(homeRoutes);
+app.use('/categories', categoryRoutes);
 
 // 404
 app.use((req, res) => {
