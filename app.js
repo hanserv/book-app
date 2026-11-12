@@ -6,6 +6,7 @@ import appContext from './context/AppContext.js';
 import {projectRoot} from './utils/paths.js';
 import homeRoutes from './routes/home-router.js';
 import categoryRoutes from './routes/category-router.js';
+import authorRoutes from './routes/author-router.js';
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 // routes
 app.use(homeRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/authors', authorRoutes);
 
 // 404
 app.use((req, res) => {
