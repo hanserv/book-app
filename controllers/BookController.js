@@ -16,7 +16,7 @@ const parseNumber = (text) => {
 
 const getFormLists = async () => {
 	const findAll = (model) =>
-		model.findAll({order: [['name', 'DESC']], raw: true});
+		model.findAll({order: [['name', 'ASC']], raw: true});
 
 	const categoryList = await findAll(appContext.Categories);
 	const authorList = await findAll(appContext.Authors);
@@ -129,7 +129,7 @@ export const getIndex = async (req, res, next) => {
 				appContext.Authors,
 				appContext.Publishers,
 			],
-			order: [['title', 'DESC']],
+			order: [['title', 'ASC']],
 			raw: true,
 			nest: true,
 		});

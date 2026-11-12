@@ -28,7 +28,7 @@ const validateAuthorForm = (name, email) => {
 export const getIndex = async (req, res, next) => {
 	try {
 		const authors = await appContext.Authors.findAll({
-			order: [['name', 'DESC']],
+			order: [['name', 'ASC']],
 			raw: true,
 		});
 		const authorList = await addBooksCount(authors, 'authorId');

@@ -37,7 +37,7 @@ const validatePublisherForm = (name, phone, country) => {
 export const getIndex = async (req, res, next) => {
 	try {
 		const publishers = await appContext.Publishers.findAll({
-			order: [['name', 'DESC']],
+			order: [['name', 'ASC']],
 			raw: true,
 		});
 		const publisherList = await addBooksCount(publishers, 'publisherId');

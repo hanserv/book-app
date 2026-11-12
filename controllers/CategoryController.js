@@ -27,7 +27,7 @@ const validateCategoryForm = (name, description) => {
 export const getIndex = async (req, res, next) => {
 	try {
 		const categories = await appContext.Categories.findAll({
-			order: [['name', 'DESC']],
+			order: [['name', 'ASC']],
 			raw: true,
 		});
 		const categoryList = await addBooksCount(categories, 'categoryId');

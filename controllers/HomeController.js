@@ -25,13 +25,13 @@ export const getIndex = async (req, res, next) => {
 				appContext.Authors,
 				appContext.Publishers,
 			],
-			order: [['title', 'DESC']],
+			order: [['title', 'ASC']],
 			raw: true,
 			nest: true,
 		});
 
 		const categories = await appContext.Categories.findAll({
-			order: [['name', 'DESC']],
+			order: [['name', 'ASC']],
 			raw: true,
 		});
 
