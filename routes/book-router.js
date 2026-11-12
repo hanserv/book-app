@@ -1,6 +1,7 @@
 import express from 'express';
 import {
 	getIndex,
+	getDetail,
 	getCreate,
 	postCreate,
 	getEdit,
@@ -14,6 +15,7 @@ const router = express.Router();
 // Book routes
 router.get('/', (req, res) => res.redirect('/books/index'));
 router.get('/index', getIndex);
+router.get('/detail/:id', getDetail);
 
 router.get('/create', getCreate);
 router.post('/create', postCreate);

@@ -144,6 +144,29 @@ export const getIndex = async (req, res, next) => {
 	}
 };
 
+export const getDetail = async (req, res, next) => {
+	try {
+		const book = await appContext.Books.findByPk(req.params.id, {
+			include: [
+				appContext.Categories,
+				appContext.Authors,
+				appContext.Publishers,
+			],
+			raw: true,
+			nest: true,
+		});
+
+		if (!book) return res.redirect('/');
+
+		res.render('book/detail', {
+			pageTitle: book.title,
+			book,
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
 export const getCreate = async (req, res, next) => {
 	try {
 		const lists = await getFormLists();

@@ -1,0 +1,62 @@
+<div>
+	<div class='d-flex justify-content-between gap-2'>
+		<a href='/' class='btn btn-outline-dark fw-semibold'>
+			<i class='bi bi-arrow-left'></i>
+			Go back
+		</a>
+	</div>
+
+	<div class='card shadow-sm border-0 mt-3'>
+		<div class='card-header bg-dark text-white'>
+			<h2 class='fs-4 m-0'>
+				<i class='bi bi-book'></i>
+				{{book.title}}
+			</h2>
+		</div>
+
+		<div class='card-body bg-white p-3'>
+			<div class='row g-4'>
+				<div class='col-12 col-md-4'>
+					{{#if book.coverUrl}}
+						<img
+							src='{{book.coverUrl}}'
+							alt='Cover of {{book.title}}'
+							class='book-detail-cover shadow-sm'
+						/>
+					{{else}}
+						<div
+							class='book-detail-placeholder bg-light d-flex align-items-center justify-content-center'
+						>
+							<i class='bi bi-image display-3 text-secondary'></i>
+						</div>
+					{{/if}}
+				</div>
+
+				<div class='col-12 col-md-8'>
+					<dl class='row mb-0'>
+						<dt class='col-sm-4'>Title</dt>
+						<dd class='col-sm-8'>{{book.title}}</dd>
+
+						<dt class='col-sm-4'>Publication year</dt>
+						<dd class='col-sm-8'>{{book.year}}</dd>
+
+						<dt class='col-sm-4'>Category</dt>
+						<dd class='col-sm-8'>{{book.Category.name}}</dd>
+
+						<dt class='col-sm-4'>Author</dt>
+						<dd class='col-sm-8'>{{book.Author.name}}</dd>
+
+						<dt class='col-sm-4'>Publisher</dt>
+						<dd class='col-sm-8'>{{book.Publisher.name}}</dd>
+
+						<dt class='col-sm-4'>Publisher country</dt>
+						<dd class='col-sm-8'>{{book.Publisher.country}}</dd>
+
+						<dt class='col-sm-4'>Publisher phone</dt>
+						<dd class='col-sm-8'>{{book.Publisher.phone}}</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
