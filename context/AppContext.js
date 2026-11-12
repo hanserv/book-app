@@ -16,7 +16,7 @@ Book.belongsTo(Publisher, {foreignKey: 'publisherId'});
 
 const connect = async () => {
 	await sequelize.authenticate();
-	await sequelize.sync();
+	await sequelize.sync({alter: true});
 
 	console.log(
 		`Database connection OK (${environment}, ${sequelize.getDialect()})`,

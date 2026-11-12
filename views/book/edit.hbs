@@ -1,0 +1,102 @@
+<div class='d-flex justify-content-center'>
+	<div class='card shadow-sm border-0 col-12 col-md-6'>
+		<div class='card-header bg-dark text-white'>
+			<h2 class='fs-4 m-0 text-center'>Edit book</h2>
+		</div>
+
+		<div class='card-body bg-white p-3'>
+			{{#if missingData}}
+				<div class='text-danger mb-3'>
+					<p class='fw-semibold mb-1'>The book cannot be edited yet:</p>
+					<ul class='mb-0'>
+						{{#each missingData}}
+							<li>{{this.message}} <a href='{{this.href}}'>{{this.linkText}}</a></li>
+						{{/each}}
+					</ul>
+				</div>
+
+				<div class='d-flex justify-content-end'>
+					<a href='/books/index' class='btn btn-outline-dark'>
+						<i class='bi bi-arrow-left'></i> Go back
+					</a>
+				</div>
+			{{else}}
+				{{#if errors}}
+					<div class='text-danger mb-2'>
+						<ul class='mb-0'>
+							{{#each errors}}
+								<li>{{this}}</li>
+							{{/each}}
+						</ul>
+					</div>
+				{{/if}}
+
+				{{#if currentCoverUrl}}
+					<div class='text-center mb-3'>
+						<img src='{{currentCoverUrl}}' alt='Current cover' class='book-cover-preview shadow-sm' />
+					</div>
+				{{/if}}
+
+				<form method='post' action='/books/edit'>
+					<input type='hidden' name='id' value='{{book.id}}' />
+
+					<div class='mb-2'>
+						<label for='title' class='form-label fw-semibold'>Title:</label>
+						<input type='text' class='form-control' id='title' name='title' value='{{book.title}}' />
+					</div>
+
+					<div class='mb-2'>
+						<label for='year' class='form-label fw-semibold'>Publication year:</label>
+						<input type='number' step='1' class='form-control' id='year' name='year' value='{{book.year}}' />
+					</div>
+
+					<div class='mb-2'>
+						<label for='coverUrl' class='form-label fw-semibold'>Cover URL:</label>
+						<input type='text' class='form-control' id='coverUrl' name='coverUrl' value='{{book.coverUrl}}' />
+						<div class='form-text'>Leave it empty to keep the current cover.</div>
+					</div>
+
+					<div class='mb-2'>
+						<label for='categoryId' class='form-label fw-semibold'>Category:</label>
+						<select class='form-select' id='categoryId' name='categoryId'>
+							<option value=''>Select a category</option>
+							{{#each categoryList}}
+								<option value='{{this.id}}' {{#if (eq this.id ../book.categoryId)}}selected{{/if}}>{{this.name}}</option>
+							{{/each}}
+						</select>
+					</div>
+
+					<div class='mb-2'>
+						<label for='authorId' class='form-label fw-semibold'>Author:</label>
+						<select class='form-select' id='authorId' name='authorId'>
+							<option value=''>Select an author</option>
+							{{#each authorList}}
+								<option value='{{this.id}}' {{#if (eq this.id ../book.authorId)}}selected{{/if}}>{{this.name}}</option>
+							{{/each}}
+						</select>
+					</div>
+
+					<div class='mb-2'>
+						<label for='publisherId' class='form-label fw-semibold'>Publisher:</label>
+						<select class='form-select' id='publisherId' name='publisherId'>
+							<option value=''>Select a publisher</option>
+							{{#each publisherList}}
+								<option value='{{this.id}}' {{#if (eq this.id ../book.publisherId)}}selected{{/if}}>{{this.name}}</option>
+							{{/each}}
+						</select>
+					</div>
+
+					<div class='mt-3 d-flex justify-content-end gap-2'>
+						<a href='/books/index' class='btn btn-outline-dark'>
+							<i class='bi bi-arrow-left'></i> Go back
+						</a>
+
+						<button type='submit' class='btn btn-dark'>
+							<i class='bi bi-save'></i> Save book
+						</button>
+					</div>
+				</form>
+			{{/if}}
+		</div>
+	</div>
+</div>

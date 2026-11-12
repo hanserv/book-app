@@ -8,6 +8,7 @@ import homeRoutes from './routes/home-router.js';
 import categoryRoutes from './routes/category-router.js';
 import authorRoutes from './routes/author-router.js';
 import publisherRoutes from './routes/publisher-router.js';
+import bookRoutes from './routes/book-router.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use(homeRoutes);
+app.use('/books', bookRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/authors', authorRoutes);
 app.use('/publishers', publisherRoutes);

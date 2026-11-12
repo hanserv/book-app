@@ -15,3 +15,23 @@
 	color: #fff;
 	font-weight: 600;
 }
+
+.book-cover-thumb {
+	width: 70px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 0.25rem;
+}
+
+.book-cover-placeholder {
+	width: 70px;
+	height: 100px;
+	border-radius: 0.25rem;
+}
+
+.book-cover-preview {
+	max-width: 160px;
+	max-height: 230px;
+	object-fit: cover;
+	border-radius: 0.25rem;
+}
