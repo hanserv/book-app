@@ -1,4 +1,5 @@
 import appContext from '../context/AppContext.js';
+import {addBooksCount} from '../utils/book-count-helper.js';
 
 const NAME_MAX_LENGTH = 100;
 const EMAIL_MAX_LENGTH = 150;
@@ -30,11 +31,12 @@ export const getIndex = async (req, res, next) => {
 			order: [['name', 'DESC']],
 			raw: true,
 		});
+		const authorList = await addBooksCount(authors, 'authorId');
 
 		res.render('author/index', {
 			pageTitle: 'Authors',
-			authorList: authors,
-			hasAuthors: authors.length > 0,
+			authorList,
+			hasAuthors: authorList.length > 0,
 		});
 	} catch (error) {
 		next(error);
@@ -124,9 +126,15 @@ export const getDelete = async (req, res, next) => {
 
 		if (!author) return res.redirect('/authors/index');
 
+		const booksCount = await appContext.Books.count({
+			where: {authorId: author.id},
+		});
+
 		res.render('author/delete', {
 			pageTitle: 'Delete author',
 			author,
+			booksCount,
+			hasBooks: booksCount > 0,
 		});
 	} catch (error) {
 		next(error);
@@ -135,7 +143,13 @@ export const getDelete = async (req, res, next) => {
 
 export const postDelete = async (req, res, next) => {
 	try {
-		await appContext.Authors.destroy({where: {id: req.body.id}});
+		const id = req.body.id;
+
+		const booksCount = await appContext.Books.count({where: {authorId: id}});
+
+		if (booksCount > 0) return res.redirect(`/authors/delete/${id}`);
+
+		await appContext.Authors.destroy({where: {id: id}});
 		res.redirect('/authors/index');
 	} catch (error) {
 		next(error);

@@ -1,4 +1,5 @@
 import appContext from '../context/AppContext.js';
+import {addBooksCount} from '../utils/book-count-helper.js';
 
 const NAME_MAX_LENGTH = 100;
 const DESCRIPTION_MAX_LENGTH = 500;
@@ -29,11 +30,12 @@ export const getIndex = async (req, res, next) => {
 			order: [['name', 'DESC']],
 			raw: true,
 		});
+		const categoryList = await addBooksCount(categories, 'categoryId');
 
 		res.render('category/index', {
 			pageTitle: 'Categories',
-			categoryList: categories,
-			hasCategories: categories.length > 0,
+			categoryList,
+			hasCategories: categoryList.length > 0,
 		});
 	} catch (error) {
 		next(error);
@@ -119,9 +121,15 @@ export const getDelete = async (req, res, next) => {
 
 		if (!category) return res.redirect('/categories/index');
 
+		const booksCount = await appContext.Books.count({
+			where: {categoryId: category.id},
+		});
+
 		res.render('category/delete', {
 			pageTitle: 'Delete category',
 			category,
+			booksCount,
+			hasBooks: booksCount > 0,
 		});
 	} catch (error) {
 		next(error);
@@ -130,7 +138,13 @@ export const getDelete = async (req, res, next) => {
 
 export const postDelete = async (req, res, next) => {
 	try {
-		await appContext.Categories.destroy({where: {id: req.body.id}});
+		const id = req.body.id;
+
+		const booksCount = await appContext.Books.count({where: {categoryId: id}});
+
+		if (booksCount > 0) return res.redirect(`/categories/delete/${id}`);
+
+		await appContext.Categories.destroy({where: {id: id}});
 		res.redirect('/categories/index');
 	} catch (error) {
 		next(error);

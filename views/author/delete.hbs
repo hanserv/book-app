@@ -8,26 +8,46 @@
 		</div>
 
 		<div class='card-body text-center py-5'>
-			<form method='post' action='/authors/delete'>
-				<input type='hidden' name='id' value='{{author.id}}' />
-
-				<p class='fs-5 mt-3 mb-4'>
-					Are you sure you want to delete the author
-					<strong>{{author.name}}</strong>?
+			{{#if hasBooks}}
+				<p class='fs-5 mt-3 mb-2'>
+					The author
+					<strong>{{author.name}}</strong>
+					cannot be deleted.
+				</p>
+				<p class='text-secondary mb-4'>
+					It has
+					{{booksCount}}
+					associated
+					{{#if (eq booksCount 1)}}book{{else}}books{{/if}}. Delete or reassign
+					them first.
 				</p>
 
-				<div class='d-flex justify-content-center gap-2'>
-					<a href='/authors/index' class='btn btn-outline-dark px-4'>
-						<i class='bi bi-x-lg'></i>
-						Cancel
-					</a>
+				<a href='/authors/index' class='btn btn-outline-dark px-4'>
+					<i class='bi bi-arrow-left'></i>
+					Go back
+				</a>
+			{{else}}
+				<form method='post' action='/authors/delete'>
+					<input type='hidden' name='id' value='{{author.id}}' />
 
-					<button type='submit' class='btn btn-danger px-4'>
-						<i class='bi bi-trash3'></i>
-						Accept
-					</button>
-				</div>
-			</form>
+					<p class='fs-5 mt-3 mb-4'>
+						Are you sure you want to delete the author
+						<strong>{{author.name}}</strong>?
+					</p>
+
+					<div class='d-flex justify-content-center gap-2'>
+						<a href='/authors/index' class='btn btn-outline-dark px-4'>
+							<i class='bi bi-x-lg'></i>
+							Cancel
+						</a>
+
+						<button type='submit' class='btn btn-danger px-4'>
+							<i class='bi bi-trash3'></i>
+							Accept
+						</button>
+					</div>
+				</form>
+			{{/if}}
 		</div>
 	</div>
 </div>

@@ -28,6 +28,12 @@
 								<div class='flex-grow-1'>
 									<h5 class='mb-1 fw-semibold'>{{this.name}}</h5>
 									<p class='text-secondary mb-0'>{{this.description}}</p>
+
+									<p class='m-0 mt-2'>
+										<strong>{{this.booksCount}}</strong>
+										{{#if (eq this.booksCount 1)}}associated book{{else}}associated
+											books{{/if}}
+									</p>
 								</div>
 								<div class='ms-4 d-flex align-items-center gap-2'>
 									<a
